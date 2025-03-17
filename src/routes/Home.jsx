@@ -54,12 +54,16 @@ const Home = () => {
     const interval = setInterval(() => {
       if (index < bars.length) {
         bars[index].style.backgroundColor = "rgb(60, 210, 110)";
-        barColors[index] = "rgb(60, 210, 110)";
-        setBarColors([...barColors]);
+        setBarColors((prevBarColors) => {
+          const newBarColors = [...prevBarColors];
+          newBarColors[index] = "rgb(60, 210, 110)";
+          return newBarColors;
+        });
       } else {
         clearInterval(interval);
         localStorage.setItem("barColors", JSON.stringify(barColors));
       }
+      index++;
     }, 100);
   };
 
