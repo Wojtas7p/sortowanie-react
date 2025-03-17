@@ -1,10 +1,21 @@
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
+
+import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
 import Home from "./routes/Home.jsx";
 
-createRoot(document.getElementById("root")).render(
+const rootElement = document.getElementById("root");
+
+if (!rootElement) {
+  throw new Error("Nie znaleziono elementu #root w index.html");
+}
+
+const root = createRoot(rootElement);
+
+root.render(
   <StrictMode>
-    <Home />
+    <ChakraProvider value={defaultSystem}>
+      <Home />
+    </ChakraProvider>
   </StrictMode>
 );
